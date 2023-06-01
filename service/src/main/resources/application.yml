@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: service-sdn
+  profiles:
+    active: dev

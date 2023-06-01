@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lja.sdn.mapper.HostMapper">
+    <select id="getSwitchHostNum" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tb_host GROUP BY linkSwitch;
+    </select>
+</mapper>
