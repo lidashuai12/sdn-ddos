@@ -3,11 +3,13 @@ package com.lja.sdn.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lja.sdn.entity.Host;
+import com.lja.sdn.entity.HostDTO;
 import com.lja.sdn.result.R;
 import com.lja.sdn.service.HostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,9 +32,22 @@ public class HostController {
      * 获取所有主机
      * @return 返回所有主机列表
      */
+//    @GetMapping("listHost")
+//    public R listAcl() {
+//
+//        return R.ok().data("hostList", hostService.list(null));
+//    }
     @GetMapping("listHost")
     public R listAcl() {
-        return R.ok().data("hostList", hostService.list(null));
+        List<Host> list = hostService.list(null);
+        List<HostDTO> dtoList = new ArrayList<>();
+        for (Host host : list) {
+            HostDTO hostDTO = new HostDTO();
+            hostDTO.setIp(host.getIp().substring(2));
+            hostDTO.setMac(host.getMac());
+            dtoList.add(hostDTO);
+        }
+        return R.ok().data("hostList", dtoList);
     }
 
     /**
