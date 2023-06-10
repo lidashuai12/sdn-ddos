@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -28,8 +29,6 @@ public class StaticflowController {
 
     /**
      * 分页获取静态流表
-     * @param current 当前页面
-     * @param limit 每页条数
      * @return 返回静态流表的列表
      */
 //    @GetMapping("getStaticFlowListPage/{current}/{limit}")
@@ -42,10 +41,21 @@ public class StaticflowController {
 //    }
     @GetMapping("getStaticFlowList")
     public R getStaticFlowListPage() {
-        List<Staticflow> staticFlowList = staticflowService.list(null);
+        List<Staticflow> staticFlowList = staticflowService.list(null).stream().map((item)->{
+            String switchID = item.getSwitchID();
+            String[] split = switchID.split(":");
+            item.setSwitchID(split[split.length-1]);
+            return item;
+        }).collect(Collectors.toList());
         long total = staticFlowList.size();
         return R.ok().data("staticFlowList",staticFlowList).data("total",total);
     }
+//    @GetMapping("getStaticFlowList")
+//    public R getStaticFlowListPage() {
+//        List<Staticflow> staticFlowList = staticflowService.list(null);
+//        long total = staticFlowList.size();
+//        return R.ok().data("staticFlowList",staticFlowList).data("total",total);
+//    }
 
     /**
      * 添加流表项
