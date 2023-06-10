@@ -3,12 +3,14 @@ package com.lja.sdn.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lja.sdn.entity.Switch;
+import com.lja.sdn.entity.SwitchDTO;
 import com.lja.sdn.result.R;
 import com.lja.sdn.service.SwitchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -48,7 +50,14 @@ public class SwitchController {
     @GetMapping("getSwitchList")
     public R getSwitchListPage() {
         List<Switch> switchList = switchService.list(null);
-        return R.ok().data("switchList", switchList);
+        List<SwitchDTO> switchDTOList = switchList.stream().map((item) -> {
+            SwitchDTO switchDTO = new SwitchDTO();
+            switchDTO.setPort(item.getPorts());
+            switchDTO.setMac(item.getMac());
+            switchDTO.setIpv6(item.getIpv6());
+            return switchDTO;
+        }).collect(Collectors.toList());
+        return R.ok().data("switchList", switchDTOList);
     }
 
     /**
