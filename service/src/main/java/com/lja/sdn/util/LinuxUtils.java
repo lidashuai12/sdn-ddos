@@ -26,8 +26,8 @@ public class LinuxUtils {
     public static final String fileName = "check1.txt";
     public static final String checkName = "check2.txt";
     public static final String remotePath = "/home/mao/Mao/Documents/";
-    public static final String localPath1 = "D:\\IDEA\\WorkSpace\\sdn_management\\service\\src\\main\\resources\\check1\\";
-    public static final String localPath2 = "D:\\IDEA\\WorkSpace\\sdn_management\\service\\src\\main\\resources\\check2\\";
+    public static final String localPath1 = "D:\\IDEA\\Workspace\\sdn-ddos\\service\\src\\main\\resources\\check1\\";
+    public static final String localPath2 = "D:\\IDEA\\Workspace\\sdn-ddos\\service\\src\\main\\resources\\check2\\";
     public static final String hostname = "192.168.199.200";
     public static final String user = "mao";
     public static final String password = "mao";

@@ -68,7 +68,7 @@ public class AttackServiceImpl extends ServiceImpl<AttackMapper, Attack> impleme
 //    }
     @Override
     public Map<String, Object> getTimeHosts() {
-        int[] inPortCount = new int[5];  //每个交换机端口个数，统计每个端口受攻击次数
+        int[] inPortCount = new int[6];  //每个交换机端口个数，统计每个端口受攻击次数
         List<String> timeList = new ArrayList<>();
         List<String> hostList = new ArrayList<>();
         List<Integer> numList = new ArrayList<>();
@@ -89,7 +89,7 @@ public class AttackServiceImpl extends ServiceImpl<AttackMapper, Attack> impleme
                 }
             }
         }
-        for (int i = 0; i < inPortCount.length; i++) {
+        for (int i = 1; i < inPortCount.length; i++) {
             Port port = new Port();
             port.setPort(i);
             port.setTimes(inPortCount[i]);
