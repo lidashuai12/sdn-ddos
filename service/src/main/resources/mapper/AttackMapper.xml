@@ -3,6 +3,6 @@
 <mapper namespace="com.lja.sdn.mapper.AttackMapper">
 
     <select id="getTimeHosts" resultType="com.lja.sdn.entity.Attack">
-        SELECT ANY_VALUE(switchId) switchId,ANY_VALUE(inPort) inPort,attackTime,COUNT(*) num from tb_attack GROUP BY attackTime ORDER BY attackTime DESC LIMIT 7;
+        SELECT ANY_VALUE(switchId) switchId,ANY_VALUE(inPort) inPort,attackTime,COUNT(*) num from tb_attack GROUP BY attackTime ORDER BY attackTime DESC LIMIT 20;
     </select>
 </mapper>

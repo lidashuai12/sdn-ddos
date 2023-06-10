@@ -32,12 +32,18 @@ public class StaticflowController {
      * @param limit 每页条数
      * @return 返回静态流表的列表
      */
-    @GetMapping("getStaticFlowListPage/{current}/{limit}")
-    public R getStaticFlowListPage(@PathVariable Long current, @PathVariable Long limit) {
-        Page<Staticflow> page = new Page<>(current, limit);
-        staticflowService.page(page,null);
-        List<Staticflow> staticFlowList = page.getRecords();
-        long total = page.getTotal();
+//    @GetMapping("getStaticFlowListPage/{current}/{limit}")
+//    public R getStaticFlowListPage(@PathVariable Long current, @PathVariable Long limit) {
+//        Page<Staticflow> page = new Page<>(current, limit);
+//        staticflowService.page(page,null);
+//        List<Staticflow> staticFlowList = page.getRecords();
+//        long total = page.getTotal();
+//        return R.ok().data("staticFlowList",staticFlowList).data("total",total);
+//    }
+    @GetMapping("getStaticFlowList")
+    public R getStaticFlowListPage() {
+        List<Staticflow> staticFlowList = staticflowService.list(null);
+        long total = staticFlowList.size();
         return R.ok().data("staticFlowList",staticFlowList).data("total",total);
     }
 

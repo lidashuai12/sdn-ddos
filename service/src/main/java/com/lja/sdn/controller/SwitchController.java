@@ -42,6 +42,16 @@ public class SwitchController {
     }
 
     /**
+     * 获取所有交换机，不分页
+     * @return
+     */
+    @GetMapping("getSwitchList")
+    public R getSwitchListPage() {
+        List<Switch> switchList = switchService.list(null);
+        return R.ok().data("switchList", switchList);
+    }
+
+    /**
      * 添加交换机
      * @param s 交换机对象实体
      * @return 返回添加结果

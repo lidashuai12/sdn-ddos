@@ -106,9 +106,9 @@ public class AttackController {
     }
 
     /**
-     * 最近七次被攻击主机及时间集合
+     * 最近二十次被攻击主机及时间集合
      *
-     * @return 返回最近七次被攻击的主机和被攻击的时间
+     * @return 返回最近二十次被攻击的主机和被攻击的时间
      */
     @GetMapping("getTimeHosts")
     public R getTimeHosts() {
