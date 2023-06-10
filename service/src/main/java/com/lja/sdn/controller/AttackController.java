@@ -1,5 +1,6 @@
 package com.lja.sdn.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lja.sdn.entity.Attack;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -86,9 +89,21 @@ public class AttackController {
         }
         Map<String, Object> map = new HashMap<>();
 //        int i = attackList.size() - 1;
+        //统计所有攻击次数和本次所受攻击次数
+        //所有攻击次数
+        int allCount = attackService.count(null);
+        //本次攻击次数
+        LambdaQueryWrapper<Attack> lwq = new LambdaQueryWrapper<Attack>();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
+        String dateTime = dateTimeFormatter.format(LocalDateTime.now());
+        lwq.like(Attack::getAttackTime,dateTime);
+        int thisCount = attackService.count(lwq);
+
         map.put("switchId",attackList.get(0).getSwitchId());
         map.put("inPort",attackList.get(0).getInPort());
         map.put("dstIp",attackList.get(0).getDstIp());
+        map.put("allCount",allCount);
+        map.put("thisCount",thisCount);
         return R.ok().data("attackInfo",map);
     }
 
