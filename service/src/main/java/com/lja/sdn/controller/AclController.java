@@ -1,7 +1,14 @@
 package com.lja.sdn.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lja.sdn.entity.Acl;
+import com.lja.sdn.result.R;
+import com.lja.sdn.service.AclService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,11 +21,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/sdn/acl")
 public class AclController {
-/*
     @Autowired
     private AclService aclService;
 
-    @GetMapping("listAcl")
+    @GetMapping("/listAcl")
     public R listAcl() {
         return R.ok().data("aclList", aclService.list(null));
     }
@@ -42,6 +48,6 @@ public class AclController {
     public R deleteAcl(@PathVariable Long id) {
         aclService.removeById(id);
         return R.ok().message("delete acl success");
-    }*/
+    }
 }
 

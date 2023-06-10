@@ -4,7 +4,10 @@ import com.lja.sdn.service.AclService;
 import com.lja.sdn.entity.Acl;
 import com.lja.sdn.mapper.AclMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,22 +19,22 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AclServiceImpl extends ServiceImpl<AclMapper, Acl> implements AclService {
-//
-//    @Autowired
-//    private AclMapper aclMapper;
-//
-//    @Override
-//    public List<Acl> listAcl() {
-//        return aclMapper.selectList(null);
-//    }
-//
-//    @Override
-//    public boolean saveAcl(Acl acl) {
-//        return aclMapper.insert(acl) > 0;
-//    }
-//
-//    @Override
-//    public boolean removeAcl(int id) {
-//        return aclMapper.deleteById(id) > 0;
-//    }
+
+    @Autowired
+    private AclMapper aclMapper;
+
+    @Override
+    public List<Acl> listAcl() {
+        return aclMapper.selectList(null);
+    }
+
+    @Override
+    public boolean saveAcl(Acl acl) {
+        return aclMapper.insert(acl) > 0;
+    }
+
+    @Override
+    public boolean removeAcl(int id) {
+        return aclMapper.deleteById(id) > 0;
+    }
 }

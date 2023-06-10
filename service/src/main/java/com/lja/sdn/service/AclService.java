@@ -3,6 +3,8 @@ package com.lja.sdn.service;
 import com.lja.sdn.entity.Acl;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,9 +15,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface AclService extends IService<Acl> {
 
-//    List<Acl> listAcl();
-//
-//    boolean saveAcl(Acl acl);
-//
-//    boolean removeAcl(int id);
+    List<Acl> listAcl();
+
+    boolean saveAcl(Acl acl);
+
+    boolean removeAcl(int id);
 }
