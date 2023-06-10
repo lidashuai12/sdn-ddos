@@ -45,6 +45,9 @@ public class HostController {
             HostDTO hostDTO = new HostDTO();
             hostDTO.setIp(host.getIp().substring(2));
             hostDTO.setMac(host.getMac());
+            String[] split = host.getLinkSwitch().split(":");
+            hostDTO.setLinkSwitch(split[split.length-1]);
+            hostDTO.setLinkPort(host.getLinkPort());
             dtoList.add(hostDTO);
         }
         return R.ok().data("hostList", dtoList);

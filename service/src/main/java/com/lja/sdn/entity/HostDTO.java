@@ -9,5 +9,9 @@ public class HostDTO {
 
     private String mac;
 
+    private String linkSwitch;
+
+    private Integer linkPort;
+
     private String stat = "在线";
 }
