@@ -45,6 +45,10 @@ public class StaticflowController {
             String switchID = item.getSwitchID();
             String[] split = switchID.split(":");
             item.setSwitchID(split[split.length-1]);
+            String srcIp = item.getSrcIp().substring(2);
+            item.setSrcIp(srcIp); //去掉源Ip前的冒号
+            String dstIp = item.getDstIp().substring(2);
+            item.setDstIp(dstIp); //去掉目的Ip前的冒号
             return item;
         }).collect(Collectors.toList());
         long total = staticFlowList.size();

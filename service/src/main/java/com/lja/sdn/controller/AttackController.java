@@ -101,6 +101,8 @@ public class AttackController {
 
         map.put("switchId",attackList.get(0).getSwitchId());
         map.put("inPort",attackList.get(0).getInPort());
+        //尝试添加源IP
+        map.put("srcIp",attackList.get(0).getSrcIp());
         map.put("dstIp",attackList.get(0).getDstIp());
         map.put("allCount",allCount);
         map.put("thisCount",thisCount);
