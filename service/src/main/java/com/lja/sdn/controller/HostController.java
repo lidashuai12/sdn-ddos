@@ -43,6 +43,7 @@ public class HostController {
         List<HostDTO> dtoList = new ArrayList<>();
         for (Host host : list) {
             HostDTO hostDTO = new HostDTO();
+            hostDTO.setId(host.getId());
             hostDTO.setIp(host.getIp().substring(2));
             hostDTO.setMac(host.getMac());
             String[] split = host.getLinkSwitch().split(":");

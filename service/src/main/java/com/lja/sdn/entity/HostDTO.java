@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class HostDTO {
+    private Integer id;
 
     private String ip;
 
