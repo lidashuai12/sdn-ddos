@@ -9,4 +9,8 @@
     <select id="get200Times" resultType="com.lja.sdn.entity.Attack">
         SELECT * from tb_attack ORDER BY attackTime DESC LIMIT 200;
     </select>
+
+    <select id="getMonthAttack" resultType="com.lja.sdn.entity.Attack">
+        SELECT DATE_FORMAT(attackTime,'%Y-%m-%d') as mday, count(*) as mcount from tb_attack WHERE attackTime BETWEEN SUBDATE(CURRENT_DATE,INTERVAL 1 MONTH) AND CURRENT_DATE GROUP BY mday ORDER BY mday DESC;
+    </select>
 </mapper>

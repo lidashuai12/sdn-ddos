@@ -7,6 +7,7 @@ import com.lja.sdn.entity.Attack;
 import com.lja.sdn.result.R;
 import com.lja.sdn.service.AttackService;
 import com.lja.sdn.util.LinuxUtils;
+import io.swagger.models.auth.In;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -134,5 +135,16 @@ public class AttackController {
         Map<String, Object> timeHosts = attackService.get200Times();
         return R.ok().data(timeHosts);
     }
+
+    /**
+     * 获取近一个月每天的攻击次数
+     * @return
+     */
+    @GetMapping("getMonthAttack")
+    public R getMonthAttack(){
+        Map<Integer, Integer> monthAttack = attackService.getMonthAttack();
+        return R.ok().data("monthAttack",monthAttack);
+    }
+
 }
 

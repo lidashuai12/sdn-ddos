@@ -265,4 +265,17 @@ public class AttackServiceImpl extends ServiceImpl<AttackMapper, Attack> impleme
         log.info("map:{}",map);
         return map;
     }
+
+    @Override
+    public Map<Integer,Integer> getMonthAttack() {
+        Map<Integer,Integer> map = new HashMap<>();
+        List<Attack> monthAttack = attackMapper.getMonthAttack();
+        log.info("monthattack:{}",monthAttack);
+        for (Attack attack : monthAttack) {
+            String split = attack.getMday().substring(8);
+            log.info("day:{}",split);
+            map.put(Integer.parseInt(split),attack.getMcount());
+        }
+        return map;
+    }
 }

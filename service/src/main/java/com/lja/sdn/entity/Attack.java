@@ -54,4 +54,10 @@ public class Attack implements Serializable {
     @TableField(exist = false)
     private Integer num;
 
+    @TableField(exist = false)
+    private Integer mcount;
+
+    @TableField(exist = false)
+    private String mday;
+
 }

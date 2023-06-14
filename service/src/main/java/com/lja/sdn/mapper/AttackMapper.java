@@ -20,4 +20,6 @@ public interface AttackMapper extends BaseMapper<Attack> {
     List<Attack> getTimeHosts();
 
     List<Attack> get200Times();
+
+    List<Attack> getMonthAttack();
 }
