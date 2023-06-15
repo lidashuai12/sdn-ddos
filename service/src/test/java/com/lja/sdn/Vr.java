@@ -6,17 +6,14 @@ import com.lja.sdn.util.LinuxUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.Test;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 @Slf4j
-public class Test {
+public class Vr {
     private final String remotePath = "/home/mao/Mao/";
     @Autowired
     private CmdService cmdService;
-    @org.junit.Test
+    @Test
     public void TestCmd() throws Exception{
         LinuxUtils.cpFile(LinuxUtils.conn,"D:\\IDEA\\WorkSpace\\sdn_management\\service\\src\\main\\resources\\scripts\\start.sh",remotePath);
         //String cmds = "cd Mao/Documents/Mininet_packets/&&sudo python2 mininetTest.py&&xterm h1";
