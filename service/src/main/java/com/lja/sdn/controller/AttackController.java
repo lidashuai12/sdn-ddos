@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lja.sdn.entity.Attack;
+import com.lja.sdn.entity.Host;
+import com.lja.sdn.mapper.HostMapper;
 import com.lja.sdn.result.R;
 import com.lja.sdn.service.AttackService;
 import com.lja.sdn.util.LinuxUtils;
@@ -36,11 +38,16 @@ import java.util.Map;
 public class AttackController {
 
     @Autowired
+    private HostMapper hostMapper;
+
+    @Autowired
     private AttackService attackService;
 
     private static int count;
 
     private static List<Attack> attackList = new ArrayList<>();
+
+    private static List<Attack> attackList1 = new ArrayList<>();
 
     /**
      * 获取历史攻击记录--分页
@@ -57,6 +64,32 @@ public class AttackController {
         long total = page.getTotal();
         return R.ok().data("attackList", records).data("total", total);
     }
+    public List<Attack> getAttackList1(){
+        if (count < 1){
+            LinuxUtils.copyFile(LinuxUtils.conn,LinuxUtils.remotePath + LinuxUtils.fileName,LinuxUtils.localPath1);
+            try {
+                FileUtils.copyFile(new File(LinuxUtils.localPath1 + LinuxUtils.fileName),new File(LinuxUtils.localPath2 + LinuxUtils.checkName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            attackList1 = LinuxUtils.getAttackList(LinuxUtils.localPath2 + LinuxUtils.checkName);
+            count++;
+        }else {
+            LinuxUtils.copyFile(LinuxUtils.conn,LinuxUtils.remotePath + LinuxUtils.fileName,LinuxUtils.localPath1);
+            try {
+                boolean b = FileUtils.contentEquals(new File(LinuxUtils.localPath1 + LinuxUtils.fileName), new File(LinuxUtils.localPath2 + LinuxUtils.checkName));
+                System.out.println(b);
+                if (!b) {
+                    FileUtils.copyFile(new File(LinuxUtils.localPath1 + LinuxUtils.fileName),new File(LinuxUtils.localPath2 + LinuxUtils.checkName));
+                    attackList1 = LinuxUtils.getAttackList(LinuxUtils.localPath2 + LinuxUtils.checkName);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return attackList1;
+    }
+
 
     /**
      * 获取攻击信息
@@ -99,7 +132,10 @@ public class AttackController {
         String dateTime = dateTimeFormatter.format(LocalDateTime.now());
         lwq.like(Attack::getAttackTime,dateTime);
         int thisCount = attackService.count(lwq);
-
+        Host host = hostMapper.selectOne(new QueryWrapper<Host>()
+                .eq("linkSwitch", attackList.get(0).getSwitchId())
+                .eq("linkPort", attackList.get(0).getInPort())
+        );
         map.put("switchId",attackList.get(0).getSwitchId());
         map.put("inPort",attackList.get(0).getInPort());
         //尝试添加源IP
@@ -107,6 +143,7 @@ public class AttackController {
         map.put("dstIp",attackList.get(0).getDstIp());
         map.put("allCount",allCount);
         map.put("thisCount",thisCount);
+        map.put("srcHost",host.getIp());
         return R.ok().data("attackInfo",map);
     }
 
