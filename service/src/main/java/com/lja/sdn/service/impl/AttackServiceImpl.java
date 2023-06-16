@@ -225,15 +225,15 @@ public class AttackServiceImpl extends ServiceImpl<AttackMapper, Attack> impleme
                         break;
                     }
                     case "02": {
-                        port_mapOfsw2.put(inPort,port_mapOfsw1.getOrDefault(inPort,0)+1);
+                        port_mapOfsw2.put(inPort,port_mapOfsw2.getOrDefault(inPort,0)+1);
                         break;
                     }
                     case "03": {
-                        port_mapOfsw3.put(inPort,port_mapOfsw1.getOrDefault(inPort,0)+1);
+                        port_mapOfsw3.put(inPort,port_mapOfsw3.getOrDefault(inPort,0)+1);
                         break;
                     }
                     default: {
-                        port_mapOfsw4.put(inPort,port_mapOfsw1.getOrDefault(inPort,0)+1);
+                        port_mapOfsw4.put(inPort,port_mapOfsw4.getOrDefault(inPort,0)+1);
                         break;
                     }
                 }
