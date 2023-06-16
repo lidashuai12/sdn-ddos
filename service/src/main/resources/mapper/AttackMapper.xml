@@ -7,7 +7,8 @@
     </select>
 
     <select id="get200Times" resultType="com.lja.sdn.entity.Attack">
-        SELECT * from tb_attack ORDER BY attackTime DESC LIMIT 200;
+--         SELECT * from tb_attack ORDER BY attackTime DESC LIMIT 200;
+            SELECT * from tb_attack ORDER BY attackTime DESC;
     </select>
 
     <select id="getMonthAttack" resultType="com.lja.sdn.entity.Attack">

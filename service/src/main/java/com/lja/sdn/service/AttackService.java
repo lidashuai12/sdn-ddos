@@ -17,7 +17,7 @@ import java.util.Map;
 public interface AttackService extends IService<Attack> {
 
     // 最近七次被攻击主机及时间集合
-    Map<String, Object> getTimeHosts();
+    //Map<String, Object> getTimeHosts();
 
     //最近200次被攻击主机及时间集合
     Map<String,Object> get200Times();

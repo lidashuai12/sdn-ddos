@@ -143,7 +143,7 @@ public class AttackController {
         map.put("dstIp",attackList.get(0).getDstIp());
         map.put("allCount",allCount);
         map.put("thisCount",thisCount);
-        map.put("srcHost",host.getIp());
+        map.put("srcHost",host.getIp().substring(2));
         return R.ok().data("attackInfo",map);
     }
 
